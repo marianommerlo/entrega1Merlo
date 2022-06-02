@@ -1,0 +1,41 @@
+{% extends "AppMerlo/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+{% if not respuesta %}
+
+<h1>Estamos buscando los clientes con apellido: {{apellido}}</h1>
+
+
+{% if clientes %}
+
+<ul>
+{% for apellido in clientes %}
+    <li>{{cliente.nombre}}</li>
+    <li>{{cliente.apellido}}</li>
+    <li>{{cliente.email}}</li>
+    <br>
+{% endfor %}
+</ul>
+
+{% else %}
+<p>No se encontraron datos para ese apellido</p>
+
+{% endif %}
+
+{% else %}
+
+<h1 style="color:red"> {{respuesta}} </h1>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block título %}
+
+<h1>PAGINA PRINCIPAL DE CLIENTES</h1>
+
+{% endblock %}

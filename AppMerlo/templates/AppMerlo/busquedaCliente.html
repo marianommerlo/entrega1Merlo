@@ -1,0 +1,19 @@
+{% extends "AppMerlo/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<form action="{% url 'buscar' %}" method="GET">
+    <input type="text" placeholder="Ingrese Apellido" name="apellido" id="apellido">
+    <input type="submit" value="BUSCAR">
+
+</form>
+
+{% endblock %}
+
+{% block título %}
+
+<h1>BUSCANDO CLIENTES</h1>
+
+{% endblock %}

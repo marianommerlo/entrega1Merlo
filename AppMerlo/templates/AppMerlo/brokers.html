@@ -1,0 +1,31 @@
+{% extends "AppMerlo/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Listado de Brokers</h1>
+
+{% if formulario.errors %}
+
+<p style="color: red">Hay un error en los datos</p>
+
+
+{% endif %}
+
+<form action= "{% url 'brokers' %}" method="POST">{% csrf_token %}
+
+    <table>
+        {{formulario.as_table}}
+    </table>
+    <input type="submit" value="ENVIAR FORMULARIO DE BROKERS">
+
+</form>
+
+{% endblock %}
+
+{% block título %}
+
+<h1>PAGINA PRINCIPAL DE BROKERS</h1>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "AppMerlo/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Descripción de Suscripciones</h1>
+
+{% if formulario.errors %}
+
+<p style="color: red">Hay un error en los datos</p>
+
+
+{% endif %}
+
+<form action= "{% url 'suscripciones' %}" method="POST">{% csrf_token %}
+
+    <table>
+        {{formulario.as_table}}
+    </table>
+    <input type="submit" value="ENVIAR FORMULARIO DE SUSCRIPCIONES">
+
+</form>
+
+{% endblock %}
+
+{% block título %}
+
+<h1>SUSCRIPCIONES Y PLANES VIGENTES</h1>
+
+{% endblock %}
