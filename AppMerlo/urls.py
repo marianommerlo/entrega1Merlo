@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import * 
+from .views import *
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', inicio, name= 'inicio'),
@@ -11,4 +12,8 @@ urlpatterns = [
     #path('suscripcionesFormulario/', SuscripcionFormulario, name= 'suscripcionesFormulario'),
     path('busquedaCliente/', busquedaCliente, name= 'busquedaCliente'),
     path('buscar/', buscar, name= 'buscar'),
+
+    #Login/Logout/Registro
+    path('login/', login_request, name= 'login'),
+    path('logout/', LogoutView.as_view(template_name="AppMerlo/logout.html"), name= 'logout'),
 ]
