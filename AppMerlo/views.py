@@ -10,10 +10,12 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 def inicio(request):
+    avatar= Avatar.objects.filter(user= request.user)
     return render(request, 'AppMerlo/inicio.html')
 
 #Formularios
@@ -141,12 +143,9 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 return render(request, 'AppMerlo/inicio.html', {'mensaje': f'Bienvenido al Sistema {usuario}'})
-
-            else:
-                return render(request, 'AppMerlo/login.html', {'formulario': formulario, 'mensaje': 'Usuario incorrecto, vuelva a loguearse'})
-        
+            
         else:
-            return render(request, 'AppMerlo/login.html', {'formulario': formulario, 'mensaje': 'Formulario inválido, vuelva a loguearse'})
+            return render(request, 'AppMerlo/login.html', {'formulario': formulario, 'mensaje': 'Usuario incorrecto, vuelva a loguearse'})
     
     else:
         formulario= AuthenticationForm()
@@ -192,42 +191,39 @@ class PerfilEliminacion(DeleteView):
     success_url= reverse_lazy('perfil_listar')
     fields= ['user', 'nombre', 'apellido', 'email']
 
-#@login_required
-#def editarPerfil(request):
-#    usuario= request.user
-
-#    if request.method == 'POST':
-#        formulario= UserEditForm(request.POST, instance= usuario)
-
-#        if formulario.is_valid():
-#            informacion= formulario.cleaned_data
-#            usuario.email= informacion['email']
-#            usuario.password1= informacion['password1']
-#            usuario.password2= informacion['password2']
-#            usuario.save()
-
-#            return render(request, 'AppMerlo/inicio.html', {'usuario': usuario, 'mensaje': f'Perfil de {usuario} editado satisfactoriamente'})
-
-#   else:
-#        formulario= UserEditForm(instance= usuario)
-        
-#    return render(request, 'AppMerlo/editarPerfil.html', {'formulario': formulario, 'usuario': usuario.username})
-
 @login_required
+def editarPerfil(request):
+    usuario= request.user
+
+    if request.method == 'POST':
+        formulario= UserEditForm(request.POST, instance= usuario)
+
+        if formulario.is_valid():
+            informacion= formulario.cleaned_data
+            usuario.email= informacion['email']
+            usuario.password1= informacion['password1']
+            usuario.password2= informacion['password2']
+            usuario.save()
+
+            return render(request, 'AppMerlo/perfil_detalle.html', {'usuario': usuario, 'mensaje': f'Perfil de {usuario} editado satisfactoriamente'})
+
+    else:
+        formulario= UserEditForm(instance= usuario)
+        
+    return render(request, 'AppMerlo/editarPerfil.html', {'formulario': formulario, 'usuario': usuario.username})
+
+
 def agregarAvatar(request):
     user= User.objects.get(username= request.user)
     if request.method == 'POST':
         formulario= AvatarForm(request.POST, request.FILES)
         
         if formulario.is_valid():
-            avatarViejo= Avatar.objects.get(user= request.user)
-
-            if(avatarViejo.avatar):
-                avatarViejo.delete()
+          
                 
             avatar= Avatar(user= user, avatar=formulario.cleaned_data['avatar'])
             avatar.save()
-            return render(request, 'AppMerlo/inicio.html', {'usuario': user, 'mensaje': f'Avatar de {user} agregado satisfactoriamente'})
+            return render(request, 'AppMerlo/perfil_detalle.html', {'usuario': user, 'mensaje': f'Avatar de {user} agregado satisfactoriamente'})
 
     else:
         formulario= AvatarForm()

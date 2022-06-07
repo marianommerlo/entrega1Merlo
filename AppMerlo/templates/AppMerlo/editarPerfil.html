@@ -1,0 +1,26 @@
+{% extends "AppMerlo/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>EDITANDO PERFIL DE <h style="color:red">{{user}}</h></h1>
+
+<form action= "{% url 'editarPerfil' %}" method="POST">{% csrf_token %}
+
+    <table>
+        {{formulario.as_table}}
+    </table>
+    <input type="submit" value="GUARDAR">
+
+</form>
+
+<button><a href="{% url 'agregarAvatar'%}">AGREGAR AVATAR</a></button>
+
+{% endblock %}
+
+{% block título %}
+
+<h1>EDITAR PERFIL</h1>
+
+{% endblock %}

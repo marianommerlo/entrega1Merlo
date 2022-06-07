@@ -20,12 +20,12 @@ urlpatterns = [
       
     path('perfil/list/', PerfilList.as_view(), name= 'perfil_listar'),
     path('perfil/detalle/<pk>/', PerfilDetalle.as_view(), name= 'perfil_detalle'),
-    path('perfil/editar/<pk>/', PerfilEdicion.as_view(), name= 'perfil_editar'),
+    #path('perfil/editar/<pk>/', PerfilEdicion.as_view(), name= 'perfil_editar'),
     path('perfil/borrar/<pk>/', PerfilEliminacion.as_view(), name= 'perfil_borrar'),
 
-    #path('editarPerfil/', editarPerfil, name= 'editarPerfil'),
+    path('editarPerfil/', editarPerfil, name= 'editarPerfil'),
    
-    path('agregarAvatar/', agregarAvatar, name= 'agrergarAvatar'),
+    path('agregarAvatar/', agregarAvatar, name= 'agregarAvatar'),
 
 
 ]
