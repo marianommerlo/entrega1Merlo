@@ -4,12 +4,26 @@
 
 {% block contenidoQueCambia %}
 
+{% if not request.user.is_authenticated %}
+
 <h1>Bienvenidos a ProyectoMerlo</h1>
+
+<h3>Iniciá sesión o registrate para formar parte de nuestra comunidad inversora</h3>
+
+{% else %}
+
+
+    <h1>Bienvenido <h style="color:red">{{user}}</h> a nuestra comunidad inversora</h1>
+    <h2>¡Te has logueado correctamente!</h2>
+    <img src="{{url}}" alt="">
+
+{% endif %}
 
 {% endblock %}
 
 {% block título %}
 
 <h1>Administrador de Clientes, Brokers y Suscripciones</h1>
+<h3>{{mensaje}}</h3>
 
 {% endblock %}

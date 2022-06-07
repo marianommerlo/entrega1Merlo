@@ -1,0 +1,29 @@
+{% extends "AppMerlo/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h2>Editando <h style="color:red">{{user}}</h></h2>
+
+<button>
+    <a href="{% url 'perfil_detalle' user.id %}">DETALLE</a>
+</button>
+
+<button>
+    <a href="{% url 'perfil_editar' user.id %}">EDITAR</a>
+</button>
+
+<button>
+    <a href="{% url 'perfil_borrar' user.id %}">BORRAR</a>
+</button>
+
+<!--NO FUNCIONAN LOS BOTONES-->
+
+{% endblock %}
+    
+{% block título %}
+
+    <h1>EDITAR PERFIL</h1>
+
+{% endblock %}

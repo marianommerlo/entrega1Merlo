@@ -1,0 +1,26 @@
+{% extends "AppMerlo/padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<p>USUARIO : <i>{{user}}</i></p>
+<p>NOMBRE : <i>{{user.nombre}}</i></p>
+<p>APELLIDO : <i>{{user.apellido}}</i></p>
+<p>EMAIL : <i>{{user.email}}</i></p>
+<p>WEB : <i>{{user.web}}</i></p>
+<p>DESCRIPCION : <i>{{user.descripcion}}</i></p>
+
+<p>
+    <a href="{% url 'perfil_listar' %}">REGRESAR</a>
+
+</p>
+
+    
+{% endblock %}
+    
+{% block título %}
+
+    <h1>DETALLE DEL PERFIL <h style="color:red">{{user}}</h></h1>
+
+{% endblock %}
