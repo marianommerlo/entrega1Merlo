@@ -23,8 +23,18 @@
 
 {% block título %}
 
+
+{% if request.user.is_authenticated %}
+
 <h1>Administrador de Clientes, Brokers y Suscripciones</h1>
 <h3>{{mensaje}}</h3>
+
+{% else %}
+
+<h1>Administrador de Clientes, Brokers y Suscripciones</h1>
+
+
+{% endif %}
 
 
 

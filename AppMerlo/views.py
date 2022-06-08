@@ -15,10 +15,14 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def inicio(request):
-    avatar= Avatar.objects.filter(user= request.user)
-    return render(request, 'AppMerlo/inicio.html')
+    if request.user.is_authenticated:
+        avatar= Avatar.objects.filter(user= request.user)
+        return render(request, 'AppMerlo/inicio.html', {'url': avatar[0].avatar.url})
+    else:
+        return render(request, template_name='AppMerlo/inicio.html')
 
 #Formularios
+@login_required
 def clientes(request):
 
     if request.method == 'POST':
@@ -49,7 +53,7 @@ def clientes(request):
     
     #return render(request, 'AppMerlo/clientesFormulario.html', {'formulario': miFormulario})
 
-
+@login_required
 def brokers(request):
     if request.method == 'POST':
         miFormulario= BrokerFormulario(request.POST)
@@ -79,7 +83,7 @@ def brokers(request):
     
     #return render(request, 'AppMerlo/brokersFormulario.html', {'formulario': miFormulario})
 
-
+@login_required
 def suscripciones(request):
 
     if request.method == 'POST':
